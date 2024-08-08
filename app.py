@@ -16,15 +16,14 @@ class AllPlaylist(db.Model):
 
 @app.route('/')
 def index():
-    playlist = db.session.query(AllPlaylist).group_by('playlist').all()
-    return render_template('index.html', playlist=playlist)
+    playlists_name = db.session.query(AllPlaylist.playlist).group_by(AllPlaylist.playlist).all()
+    playlists_name = [p[0] for p in playlists_name]
+    return render_template('index.html', playlists_name=playlists_name)
 
 @app.route('/playlist/<name>')
 def show_playlist(name):
     playlist_data = db.session.query(AllPlaylist).filter_by(playlist=name)
     return render_template('playlist.html', playlist=playlist_data)
-
-@app.route('/')
 
 @app.route('/edit')
 def edit():
@@ -34,4 +33,4 @@ def edit():
 if __name__=='__main__':
     with app.app_context():
         db.create_all()
-    # app.run()
+    app.run()

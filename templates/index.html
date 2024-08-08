@@ -9,6 +9,14 @@
     <h1 class="title">カラクト<br>
         <span class="subtitle">～カラオケ選曲～</span>
     </h1>
+
+    <!-- ラジオボタン表示 -->
+    <form>
+    {% for playlist in playlists_name %}
+        <input type="radio" name="playlist" value="{{playlist}}">{{playlist}}<br>
+    {% endfor %}
+    </form>
+
     <div class="add">
         <a href="edit.html">プレイリストを追加</a>
     </div>
